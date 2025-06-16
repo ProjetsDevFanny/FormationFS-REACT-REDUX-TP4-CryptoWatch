@@ -9,12 +9,30 @@ const HeaderInfos = () => {
   const [headerData, setHeaderData] = useState([]);
 
   useEffect(() => {
+    // Appel pour les données globales
     axios
       .get("https://api.coingecko.com/api/v3/global")
       .then((res) => {
-        console.log(res.data.data);
-        console.log(typeof res.data?.data?.markets, res.data?.data?.markets);
         setHeaderData(res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // Appel pour les top 45 cryptomonnaies
+    axios
+      .get("https://api.coingecko.com/api/v3/coins/markets", {
+        params: {
+          vs_currency: "usd",
+          order: "market_cap_desc",
+          per_page: 45,
+          page: 1,
+          sparkline: false,
+        },
+      })
+      .then((res) => {
+        // Vous pouvez stocker ces données dans un autre état si nécessaire
+        console.log("Top 45 coins:", res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -48,12 +66,10 @@ const HeaderInfos = () => {
         </li>
         {/*  = Evolution du marché dans la journée */}
         <li>
-          BTC dominance :{" "}
-          {headerData?.market_cap_percentage?.btc?.toFixed(1)} %
+          BTC dominance : {headerData?.market_cap_percentage?.btc?.toFixed(1)} %
         </li>
         <li>
-          ETH dominance :{" "}
-          {headerData?.market_cap_percentage?.eth?.toFixed(1)} %
+          ETH dominance : {headerData?.market_cap_percentage?.eth?.toFixed(1)} %
         </li>
       </ul>
       <TableFilters />

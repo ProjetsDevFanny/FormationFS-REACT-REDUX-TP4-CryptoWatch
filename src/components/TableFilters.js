@@ -5,7 +5,7 @@ const TableFilters = () => {
     <div className="table-filters ">
       <div className="table-filters-container">
         <div className="stable-checkbox-container">
-          <input type="checkbox" id="stableCoins" />
+          <input type="checkbox" id="stableCoins" defaultChecked={true} />
           <label htmlFor="stableCoins"> Avec stable coins</label>
         </div>
         <div className="no-list-btn">

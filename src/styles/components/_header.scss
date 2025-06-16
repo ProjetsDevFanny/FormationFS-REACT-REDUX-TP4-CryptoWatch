@@ -87,7 +87,7 @@ header {
     .global-mkt {
       display: flex;
 
-      p {
+      span {
         margin-left: 5px;
         font-size: 1.1rem;
       }
@@ -183,13 +183,3 @@ header {
     }
   }
 }
-
-// .percent-change {
-//   &.red {
-//     color: red;
-//   }
-  
-//   &.green {
-//     color: green;
-//   }
-// }
