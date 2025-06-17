@@ -18,25 +18,6 @@ const HeaderInfos = () => {
       .catch((error) => {
         console.log(error);
       });
-
-    // Appel pour les top 45 cryptomonnaies
-    axios
-      .get("https://api.coingecko.com/api/v3/coins/markets", {
-        params: {
-          vs_currency: "usd",
-          order: "market_cap_desc",
-          per_page: 45,
-          page: 1,
-          sparkline: false,
-        },
-      })
-      .then((res) => {
-        // Vous pouvez stocker ces données dans un autre état si nécessaire
-        console.log("Top 45 coins:", res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }, []);
 
   return (
