@@ -4,6 +4,7 @@ import TableFilters from "./components/TableFilters";
 import GlobalChart from "./components/GlobalChart";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Table from "./components/Table";
 // import CoinChart from "./components/CoinChart";
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
         <HeaderInfos />
         {/* On passe en props les données reçues et elles seront utilisées dans le composant GlobalChart et contenues dans le state (variable) coinsData */}
         <GlobalChart coinsData={coinsData}/>
+        <Table />
       </header>
     </div>
   );

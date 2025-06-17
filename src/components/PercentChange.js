@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import colors from "../styles/_settings.scss";
 
+
 // Méthode 1:
 // On utilise un useEffect pour définir la couleur en fonction de la valeur de percent
 // On utilise un useState pour stocker la couleur
