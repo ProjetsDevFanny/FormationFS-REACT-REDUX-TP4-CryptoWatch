@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/components/_table.scss";
+import TableLine from "./TableLine";
 
 const Table = ({ coinsData }) => {
   // console.log(coinsData);
@@ -27,7 +28,7 @@ const Table = ({ coinsData }) => {
 
   return (
     <div className="table-container">
-      <div className="table-header">
+      <ul className="table-header">
         <div className="range-container">
           <span>
             Top{" "}
@@ -55,12 +56,25 @@ const Table = ({ coinsData }) => {
               defaultChecked={
                 el === orderBy || el === orderBy + "reverse" ? true : false
               }
-              onChange={() => setOrderBy(el)}
+              onClick={() => {
+                if (orderBy === el) {
+                  setOrderBy(el + "reverse");
+                } else {
+                  setOrderBy(el);
+                }
+              }}
             />
             <label htmlFor={el}>{el}</label>
           </li>
         ))}
-      </div>
+      </ul>
+      {coinsData
+        ? coinsData
+            .slice(0, rangeNumber)
+            .map((coin, index) => (
+              <TableLine key={coin.id || index} coin={coin} index={index} />
+            ))
+        : null}
     </div>
   );
 };
