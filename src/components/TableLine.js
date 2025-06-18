@@ -27,8 +27,18 @@ const TableLine = ({ coin, index }) => {
         </div>
       </div>
       <p>{coin.current_price.toFixed(2)} $</p>
-      <p>{coin.market_cap} Md$</p>
-      <p>{coin.total_volume.toLocaleString("fr-FR")} $</p>
+      <p>
+        {(coin.market_cap / 1000000).toLocaleString("fr-FR", {
+          maximumFractionDigits: 1,
+        })}{" "}
+        Md$
+      </p>
+      <p>
+        {(coin.total_volume / 1000000).toLocaleString("fr-FR", {
+          maximumFractionDigits: 1,
+        })}{" "}
+        Md$
+      </p>
       <p>
         <PercentChange percent={coin.price_change_percentage_1h_in_currency} />
       </p>
@@ -57,5 +67,3 @@ const TableLine = ({ coin, index }) => {
 };
 
 export default TableLine;
-
-
