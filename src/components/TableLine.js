@@ -2,6 +2,37 @@ import React from "react";
 import PercentChange from "./PercentChange";
 
 const TableLine = ({ coin, index }) => {
+  // Formater le prix en fonction de la longueur du nombre
+  // Si le nombre est supérieur à 4 chiffres, on affiche le prix en us-US
+  // Sinon, on affiche le prix en fr-FR
+  const priceFormater = (num) => {
+    if (Math.round(num).toString().length > 4) {
+      return new Intl.NumberFormat("us-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 7,
+      }).format(num);
+    } else {
+      return num.toLocaleString("fr-FR", {
+        maximumFractionDigits: 2,
+      });
+    }
+  };
+  // ======= 2 méthodes de formatage pour le market cap ===========
+
+  // Méthode 1: mktCap: avec split et slice = bancale
+  // Formater le market cap en fonction de la longueur du nombre
+  // const marketCapFormater = (num) => {
+  //   let newNum = String(num).split("").slice(0, -6);
+  //   return Number(newNum.join(""));
+  // };
+
+  // Méthode 2: mktCap: avec la division directe par 1_000_000
+  const numFormater = (num) => {
+    return (num / 1000000).toLocaleString("fr-FR", {
+      maximumFractionDigits: 0,
+    });
+  };
+
   return (
     <div className="table-line">
       <div className="infos-container">
@@ -26,18 +57,18 @@ const TableLine = ({ coin, index }) => {
           </a>
         </div>
       </div>
-      <p>{coin.current_price.toFixed(2)} $</p>
-      <p>
-        {(coin.market_cap / 1000000).toLocaleString("fr-FR", {
-          maximumFractionDigits: 1,
+      <p>{priceFormater(coin.current_price)} $</p>
+      {/* mktCap: méthode 1: avec split et slice = bancale */}
+      {/* <p className="mktcap">
+        {marketCapFormater(coin.market_cap).toLocaleString("fr-FR", {
+          maximumFractionDigits: 0,
         })}{" "}
-        Md$
-      </p>
-      <p>
-        {(coin.total_volume / 1000000).toLocaleString("fr-FR", {
-          maximumFractionDigits: 1,
-        })}{" "}
-        Md$
+        M$
+      </p> */}
+      {/* mktCap: méthode 2: avec la division directe par 1_000_000 */}
+      <p>{numFormater(coin.market_cap)} M$</p>
+      <p className="volume">
+        {numFormater(coin.total_volume)} M$
       </p>
       <p>
         <PercentChange percent={coin.price_change_percentage_1h_in_currency} />
@@ -59,9 +90,12 @@ const TableLine = ({ coin, index }) => {
       <p>
         <PercentChange percent={coin.price_change_percentage_1y_in_currency} />
       </p>
-      <p>
-        <PercentChange percent={coin.ath_change_percentage} />
-      </p>
+      
+      {coin.ath_change_percentage > -3 ? (
+              <p className="ATH"> ATH ! </p>
+            ) : (
+              <PercentChange percent={coin.ath_change_percentage} />
+      )}
     </div>
   );
 };

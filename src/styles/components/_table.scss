@@ -1,5 +1,6 @@
 @import "../settings";
 
+
 .table-container {
   text-align: center;
   color: $white1 !important;
@@ -276,6 +277,10 @@
     .volume,
     .mktcap {
       color: $white2;
+    }
+    .ATH {
+      color: $color1;
+      font-weight: 900;
     }
   }
 }
