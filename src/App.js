@@ -5,6 +5,7 @@ import GlobalChart from "./components/GlobalChart";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "./components/Table";
+import ToTop from "./components/ToTop";
 // import CoinChart from "./components/CoinChart";
 
 const App = () => {
@@ -22,6 +23,23 @@ const App = () => {
       .catch((error) => {
         console.log(error);
       });
+
+    // ============= Fonction Scroll to top =============
+    const handleScroll = () => {
+      const tableHeader = document.querySelector(".table-header");
+      if (window.scrollY > 145) {
+        tableHeader?.classList.add("active");
+      } else {
+        tableHeader?.classList.remove("active");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
@@ -33,6 +51,7 @@ const App = () => {
       </header>
       <main>
         <Table coinsData={coinsData} />
+        <ToTop />
       </main>
     </div>
   );
