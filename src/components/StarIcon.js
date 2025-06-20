@@ -4,6 +4,7 @@ const StarIcon = ({ coinId }) => {
   // console.log(coinId);
   const [like, setLike] = useState(false);
 
+  //===================== Récupération des favoris depuis le localStorage=====================
   useEffect(() => {
     if (window.localStorage.coinList) {
       let favList = window.localStorage.coinList.split(",");
@@ -13,23 +14,31 @@ const StarIcon = ({ coinId }) => {
     }
   }, []);
 
+  //===================== Vérification si le coin est déjà dans les favoris=====================
   const idChecker = (id) => {
     let favList = null;
 
+    // Récupération des favoris depuis le localStorage
     if (window.localStorage.coinList) {
       favList = window.localStorage.coinList.split(",");
     }
 
+    // Vérification si le coin est déjà dans les favoris
     if (favList) {
       if (favList.includes(id)) {
-        window.localStorage.coinList = favList.filter((coin) => coin !== id);
+        // Suppression du coin des favoris (si il est déjà dans les favoris)
+        const newFavList = favList.filter((coin) => coin !== id);
+        window.localStorage.coinList = newFavList.join(",");
         setLike(false);
       } else {
-        window.localStorage.coinList = [...favList, coinId];
+        // Ajout du coin aux favoris (si il n'est pas déjà dans les favoris)
+        favList.push(id);
+        window.localStorage.coinList = favList.join(",");
         setLike(true);
       }
     } else {
-      window.localStorage.coinList = coinId;
+      // Ajout du coin aux favoris (si il n'y a pas de favoris)
+      window.localStorage.coinList = id;
       setLike(true);
     }
   };

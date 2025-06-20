@@ -185,7 +185,6 @@
       height: 100%;
       align-items: center;
       max-width: 100%;
-      overflow: hidden;
 
       > img, 
       .star-icon img {
@@ -221,11 +220,11 @@
         align-items: center;
         display: flex;
         text-align: left;
-        overflow: hidden;
 
         .chart-img {
           transform: translateY(2px);
           z-index: 1000;
+          position: relative;
 
           @media screen and (max-width: 770px) {
             display: none;

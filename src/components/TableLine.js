@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import PercentChange from "./PercentChange";
 import StarIcon from "./StarIcon";
+import CoinChart from "./CoinChart";
 
 const TableLine = ({ coin, index }) => {
+  const [showChart, setShowChart] = useState(false);
+
   // Formater le prix en fonction de la longueur du nombre
   // Si le nombre est supérieur à 4 chiffres, on affiche le prix en us-US
   // Sinon, on affiche le prix en fr-FR
@@ -37,14 +40,23 @@ const TableLine = ({ coin, index }) => {
   return (
     <div className="table-line">
       <div className="infos-container">
-        <StarIcon coinId={coin.id}/>
+        <StarIcon coinId={coin.id} />
         <p>{index + 1}</p>
         <div className="img">
           <img src={coin.image} height={20} alt={coin.name} />
         </div>
         <div className="infos">
-          <div className="chart-img">
+          <div
+            className="chart-img"
+            onMouseEnter={() => setShowChart(true)}
+            onMouseLeave={() => setShowChart(false)}
+          >
             <img src="./assets/chart-icon.svg" alt="chart-icon" />
+            {showChart && (
+              <div className="chart-container" id={coin.name}>
+                <CoinChart />
+              </div>
+            )}
           </div>
           <h4>{coin.name}</h4>
           <span>- {coin.symbol.toUpperCase()}</span>
@@ -68,9 +80,7 @@ const TableLine = ({ coin, index }) => {
       </p> */}
       {/* mktCap: méthode 2: avec la division directe par 1_000_000 */}
       <p>{numFormater(coin.market_cap)} M$</p>
-      <p className="volume">
-        {numFormater(coin.total_volume)} M$
-      </p>
+      <p className="volume">{numFormater(coin.total_volume)} M$</p>
       <p>
         <PercentChange percent={coin.price_change_percentage_1h_in_currency} />
       </p>
@@ -91,11 +101,11 @@ const TableLine = ({ coin, index }) => {
       <p>
         <PercentChange percent={coin.price_change_percentage_1y_in_currency} />
       </p>
-      
+
       {coin.ath_change_percentage > -3 ? (
-              <p className="ATH"> ATH ! </p>
-            ) : (
-              <PercentChange percent={coin.ath_change_percentage} />
+        <p className="ATH"> ATH ! </p>
+      ) : (
+        <PercentChange percent={coin.ath_change_percentage} />
       )}
     </div>
   );

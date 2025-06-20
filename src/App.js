@@ -10,19 +10,8 @@ import ToTop from "./components/ToTop";
 
 const App = () => {
   const [coinsData, setCoinsData] = useState([]);
-  // const [favorites, setFavorites] = useState([]);
-  // const [showFavorites, setShowFavorites] = useState(false);
-
-  // Sauvegarder les favoris dans le localStorage quand favorites change
-  // useEffect(() => {
-  //   localStorage.setItem("favorites", JSON.stringify(favorites));
-  // }, [favorites]);
-
-  // Charger les favoris depuis le localStorage quand le composant est monté
+  
   useEffect(() => {
-    // Charger les favoris depuis le localStorage
-    // const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    // setFavorites(savedFavorites);
 
     axios
       .get(
@@ -64,11 +53,7 @@ const App = () => {
       <main>
         <Table
           coinsData={coinsData}
-          // favorites={favorites}
-          // setFavorites={setFavorites}
-          // showFavorites={showFavorites}
-          // setShowFavorites={setShowFavorites}
-        />
+          />
         <ToTop />
       </main>
     </div>

@@ -3,12 +3,11 @@ import "../styles/components/_table.scss";
 import TableLine from "./TableLine";
 import ToTop from "./ToTop";
 
-const Table = ({ coinsData, favorites, setFavorites, showFavorites }) => {
+const Table = ({ coinsData }) => {
   // console.log(coinsData);
 
   const [rangeNumber, setRangeNumber] = useState(100);
   const [orderBy, setOrderBy] = useState("Prix"); // nom du tri que l'on souhaite faire
-  
 
   // Fonction pour gérer le changement de la valeur du range
   const handleRangeChange = (e) => {
@@ -121,10 +120,6 @@ const Table = ({ coinsData, favorites, setFavorites, showFavorites }) => {
     return ""; // rien si ce n’est pas la colonne active
   };
 
-  // Fonction pour afficher les données en fonction du showFavorites
-  const dataToDisplay = showFavorites
-  ? sortedData.filter((coin) => favorites.includes(coin.id))
-  : sortedData;
 
   return (
     <div className="table-container">
@@ -165,17 +160,11 @@ const Table = ({ coinsData, favorites, setFavorites, showFavorites }) => {
           </li>
         ))}
       </ul>
-      {dataToDisplay
-        ? dataToDisplay
+      {sortedData
+        ? sortedData
             .slice(0, rangeNumber)
             .map((coin, index) => (
-              <TableLine
-                key={coin.id || index}
-                coin={coin}
-                index={index}
-                favorites={favorites}
-                setFavorites={setFavorites}
-              />
+              <TableLine key={coin.id || index} coin={coin} index={index} />
             ))
         : null}
     </div>
