@@ -187,7 +187,8 @@
       max-width: 100%;
       overflow: hidden;
 
-      > img {
+      > img, 
+      .star-icon img {
         height: 12px;
         display: block;
         margin-left: auto;

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const TableFilters = () => {
+  // const [showFavorites, setShowFavorites] = useState(false);
+
   return (
     <div className="table-filters ">
       <div className="table-filters-container">
@@ -11,8 +13,12 @@ const TableFilters = () => {
         <div className="no-list-btn">
           <p>Aucune liste</p>
         </div>
-        <div className="fav-list">
-          <p>Liste des favoris</p>
+        <div
+          className="fav-list"
+          // onClick={() => setShowFavorites((prev) => !prev)}
+          style={{ cursor: "pointer" }}
+        >
+          {/* <p>{showFavorites ? "Voir tous les coins" : "Liste des favoris"}</p> */}
           <img src="/assets/star-full.svg" alt="star-full" />
         </div>
       </div>
