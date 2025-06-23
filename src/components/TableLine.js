@@ -54,7 +54,7 @@ const TableLine = ({ coin, index }) => {
             <img src="./assets/chart-icon.svg" alt="chart-icon" />
             {showChart && (
               <div className="chart-container" id={coin.name}>
-                <CoinChart />
+                <CoinChart coinId={coin.id} coinName={coin.name} />
               </div>
             )}
           </div>
