@@ -2,7 +2,7 @@
 
 ## 📸 Capture d'écran
 
-![CryptoWatch Dashboard](src\assets\ScreenShot_CryptoWatch.png)
+![CryptoWatch Dashboard](src/assets/ScreenShot_CryptoWatch.png)
 
 ## 🌐 Demo Live
 
