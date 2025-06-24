@@ -10,9 +10,11 @@ const StarIcon = ({ coinId }) => {
       let favList = window.localStorage.coinList.split(",");
       if (favList.includes(coinId)) {
         setLike(true);
+      } else {
+        setLike(false);
       }
     }
-  }, []);
+  }, [coinId]);
 
   //===================== Vérification si le coin est déjà dans les favoris=====================
   const idChecker = (id) => {

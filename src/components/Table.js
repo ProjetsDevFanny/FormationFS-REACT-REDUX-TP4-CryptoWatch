@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import "../styles/components/_table.scss";
 import TableLine from "./TableLine";
 import ToTop from "./ToTop";
+import { useSelector } from "react-redux";
+import { isStableCoin } from "./Utils";
 
 const Table = ({ coinsData }) => {
   // console.log(coinsData);
 
   const [rangeNumber, setRangeNumber] = useState(100);
   const [orderBy, setOrderBy] = useState("Prix"); // nom du tri que l'on souhaite faire
+  const showStable = useSelector((state) => state.stable.showStable);
 
   // Fonction pour gérer le changement de la valeur du range
   const handleRangeChange = (e) => {
@@ -117,9 +120,8 @@ const Table = ({ coinsData }) => {
   const getSortArrow = (el) => {
     if (orderBy === el) return " ↑"; // décroissant
     if (orderBy === "reverse" + el) return " ↓"; // croissant
-    return ""; // rien si ce n’est pas la colonne active
+    return ""; // rien si ce n'est pas la colonne active
   };
-
 
   return (
     <div className="table-container">
@@ -163,6 +165,14 @@ const Table = ({ coinsData }) => {
       {sortedData
         ? sortedData
             .slice(0, rangeNumber)
+            .filter((coin) => {
+              if (showStable) {
+                return true; // on affiche tout
+              } else {
+                return !isStableCoin(coin.symbol); // on exclut les stablecoins
+              }
+            })
+            // Version plus courte : .filter((coin) => showStable || !isStableCoin(coin.symbol))
             .map((coin, index) => (
               <TableLine key={coin.id || index} coin={coin} index={index} />
             ))

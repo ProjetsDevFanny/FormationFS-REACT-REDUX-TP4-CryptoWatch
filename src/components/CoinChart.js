@@ -92,7 +92,7 @@ const CoinChart = ({ coinId, coinName }) => {
     return () => {
       abortController.abort();
     };
-    console.log(duration);
+    // console.log(duration);
   }, [duration, coinId, coinName]);
 
   console.log(

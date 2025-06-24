@@ -48,12 +48,12 @@ const GlobalChart = ({ coinsData }) => {
             name:
               coinsData[i].symbol.toUpperCase() +
               "  " +
-              coinsData[i].price_change_percentage_24h.toFixed(2) +
+              coinsData[i].market_cap_change_percentage_24h.toFixed(2) +
               "%",
             size: coinsData[i].market_cap,
             fill:
               // On va plutôt utiliser la fonction colorPicker
-              colorPicker(coinsData[i].price_change_percentage_24h),
+              colorPicker(coinsData[i].market_cap_change_percentage_24h),
 
             // coinsData[i].market_cap_change_percentage_24h > 1
             //   ? colors.green1

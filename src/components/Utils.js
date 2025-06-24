@@ -1,0 +1,31 @@
+export const isStableCoin = (coin) => {
+  let stables = [
+    "usdt",
+    "usdc",
+    "bust",
+    "dai",
+    "ust",
+    "mim",
+    "usdp",
+    "tusd",
+    "usdn",
+    "fei",
+    "tribe",
+    "gusd",
+    "frax",
+    "lusd",
+    "ousd",
+    "xsgd",
+    "usdx",
+    "eurs",
+    "cusdc",
+    "cdai",
+    "usdd",
+    "ibeur",
+    "eurt",
+    "flexusd",
+    "alusd",
+    "susd",
+  ]
+  return stables.includes(coin.toLowerCase()); // ✅ Vrai si c'est un stablecoin
+};
