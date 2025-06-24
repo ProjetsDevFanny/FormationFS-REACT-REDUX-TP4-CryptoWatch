@@ -11,6 +11,8 @@ const Table = ({ coinsData }) => {
   const [rangeNumber, setRangeNumber] = useState(100);
   const [orderBy, setOrderBy] = useState("Prix"); // nom du tri que l'on souhaite faire
   const showStable = useSelector((state) => state.stable.showStable);
+  const showFavList = useSelector((state) => state.list.showList);
+  console.log(showFavList);
 
   // Fonction pour gérer le changement de la valeur du range
   const handleRangeChange = (e) => {
@@ -104,6 +106,13 @@ const Table = ({ coinsData }) => {
     "ATH",
   ];
 
+  // Récupération de la liste des favoris
+  let favList = [];
+  if (showFavList) {
+    favList = window.localStorage.coinList?.split(",") || [];
+    console.log("Liste des favoris :", favList);
+  }
+
   // Trier les données
   const sortedData = sortData(coinsData);
 
@@ -173,6 +182,13 @@ const Table = ({ coinsData }) => {
               }
             })
             // Version plus courte : .filter((coin) => showStable || !isStableCoin(coin.symbol))
+            .filter((coin) => {
+              if (showFavList) {
+                return favList.includes(coin.id); // utiliser favList ici
+              } else {
+                return true; // afficher tous si showFavList est false
+              }
+            })
             .map((coin, index) => (
               <TableLine key={coin.id || index} coin={coin} index={index} />
             ))
